@@ -9,4 +9,6 @@
     <dimen name="League">15sp</dimen>
 
     <dimen name="minimum_accessible_height">48dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
+
 </resources>
