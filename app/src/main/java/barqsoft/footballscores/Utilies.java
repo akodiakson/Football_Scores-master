@@ -1,5 +1,14 @@
 package barqsoft.footballscores;
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.os.Build;
+import android.text.TextUtils;
+import android.view.View;
+
+import java.lang.ref.WeakReference;
+import java.util.Locale;
+
 /**
  * Created by yehya khaled on 3/3/2015.
  */
@@ -53,16 +62,30 @@ public class Utilies
         }
     }
 
+
     public static String getScores(int home_goals,int awaygoals)
     {
+
+
+
         if(home_goals < 0 || awaygoals < 0)
         {
             return " - ";
+        }
+        if(isRTL()){
+            return String.valueOf(awaygoals) + " - " + String.valueOf(home_goals);
         }
         else
         {
             return String.valueOf(home_goals) + " - " + String.valueOf(awaygoals);
         }
+    }
+
+    /* Determine if the user's display direction is RTL. If so, we'll show the home score on the right and away score on the left*/
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static boolean isRTL() {
+        final int layoutDirectionFromLocale = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault());
+        return layoutDirectionFromLocale == View.LAYOUT_DIRECTION_RTL;
     }
 
     public static int getTeamCrestByTeamName (String teamname)
