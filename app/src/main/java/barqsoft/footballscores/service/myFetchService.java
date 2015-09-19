@@ -47,7 +47,6 @@ public class myFetchService extends IntentService
 
     private void getData (String timeFrame)
     {
-        System.out.println("ASDF getting data");
         //Creating fetch URL
         final String BASE_URL = "http://api.football-data.org/alpha/fixtures"; //Base URL
         final String QUERY_TIME_FRAME = "timeFrame"; //Time Frame parameter to determine days
