@@ -16,7 +16,6 @@ public class MainActivity extends ActionBarActivity
     public static String LOG_TAG = "MainActivity";
     private final String save_tag = "Save Test";
     private PagerFragment my_main;
-    private int mAppWidgetId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +27,6 @@ public class MainActivity extends ActionBarActivity
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, my_main)
                     .commit();
-        }
-
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            mAppWidgetId = extras.getInt(
-                    AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID);
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-            RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.app_widget_initial_layout);
-            appWidgetManager.updateAppWidget(mAppWidgetId, remoteViews);
-            Intent resultValue = new Intent();
-            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-            setResult(RESULT_OK, resultValue);
-            finish();
         }
     }
 

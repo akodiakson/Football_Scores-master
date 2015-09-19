@@ -16,6 +16,6 @@
         android:gravity="center"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:text="No data available"
+        android:text="@string/widget_no_games"
         android:textSize="20sp" />
 </FrameLayout>
