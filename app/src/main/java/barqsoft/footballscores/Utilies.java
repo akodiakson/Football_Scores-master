@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.LayoutDirection;
 import android.view.View;
 
 import java.lang.ref.WeakReference;
@@ -83,10 +84,14 @@ public class Utilies
 
     /* Determine if the user's display direction is RTL. If so, we'll show the home score on the right and away score on the left*/
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private static boolean isRTL() {
+    public static boolean isRTL() {
         final int layoutDirectionFromLocale = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault());
         return layoutDirectionFromLocale == View.LAYOUT_DIRECTION_RTL;
     }
+
+//    public static LayoutDirection getLayoutDirection(){
+//        return isRTL() ? LayoutDirection.RTL : LayoutDirection.LTR;
+//    }
 
     public static int getTeamCrestByTeamName (String teamname)
     {
