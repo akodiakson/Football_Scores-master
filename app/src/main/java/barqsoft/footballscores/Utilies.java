@@ -114,6 +114,6 @@ public class Utilies
     }
 
     public static boolean hasGameStarted(int homeScore, int awayScore) {
-        return homeScore > 0 && awayScore > 0;
+        return homeScore > -1 && awayScore > -1;
     }
 }

@@ -55,6 +55,7 @@
     <string name="to">to</string>
     <string name="game_has_not_started">No score. Game has not started.</string>
     <string name="unknown_league">Unknown league, please report.</string>
+    <string name="match_details">Match details</string>
     <!--<string name="a11y_home_team_score">High: <xliff:g id="high">%1$s</xliff:g></string>-->
     <!--<string name="a11y_away_team_score">Low: <xliff:g id="low">%1$s</xliff:g></string>-->
 

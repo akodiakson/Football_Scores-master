@@ -1,5 +1,6 @@
 package barqsoft.footballscores;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -7,6 +8,8 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -43,6 +46,7 @@ public class scoresAdapter extends CursorAdapter
         return mItem;
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void bindView(View view, final Context context, Cursor cursor)
     {
@@ -53,6 +57,7 @@ public class scoresAdapter extends CursorAdapter
         mHolder.away_name.setContentDescription(context.getString(R.string.a11y_away_team_name, cursor.getString(COL_AWAY)));
 
         mHolder.date.setText(cursor.getString(COL_MATCHTIME));
+        mHolder.date.setContentDescription(context.getString(R.string.game_time) + " " + cursor.getString(COL_MATCHTIME));
         final String scores = Utilies.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS));
         mHolder.score.setText(scores);
 
@@ -78,8 +83,12 @@ public class scoresAdapter extends CursorAdapter
         {
             //Log.v(FetchScoreTask.LOG_TAG,"will insert extraView");
 
+
             container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , ViewGroup.LayoutParams.MATCH_PARENT));
+            AccessibilityEvent event = AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+            event.setContentDescription(context.getResources().getString(R.string.match_details));
+            container.requestSendAccessibilityEvent(container.getChildAt(0), event);
             TextView match_day = (TextView) v.findViewById(R.id.matchday_textview);
             match_day.setText(Utilies.getMatchDay(cursor.getInt(COL_MATCHDAY),
                     cursor.getInt(COL_LEAGUE)));
