@@ -11,23 +11,23 @@ public class ViewHolder
 {
     public TextView home_name;
     public TextView away_name;
-    public TextView score;
+//    public TextView score;
     public TextView home_team_score;
     public TextView away_team_score;
     public TextView date;
-    public ImageView home_crest;
-    public ImageView away_crest;
+//    public ImageView home_crest;
+//    public ImageView away_crest;
     public double match_id;
     public ViewHolder(View view)
     {
         home_name = (TextView) view.findViewById(R.id.home_name);
         away_name = (TextView) view.findViewById(R.id.away_name);
-        score     = (TextView) view.findViewById(R.id.score_textview);
+//        score     = (TextView) view.findViewById(R.id.score_textview);
         home_team_score = (TextView) view.findViewById(R.id.home_team_score);
         away_team_score = (TextView) view.findViewById(R.id.away_team_score);
 
         date      = (TextView) view.findViewById(R.id.data_textview);
-        home_crest = (ImageView) view.findViewById(R.id.home_crest);
-        away_crest = (ImageView) view.findViewById(R.id.away_crest);
+//        home_crest = (ImageView) view.findViewById(R.id.home_crest);
+//        away_crest = (ImageView) view.findViewById(R.id.away_crest);
     }
 }

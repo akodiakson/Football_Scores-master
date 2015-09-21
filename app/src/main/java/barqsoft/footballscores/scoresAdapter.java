@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,30 +52,39 @@ public class scoresAdapter extends CursorAdapter
     public void bindView(View view, final Context context, Cursor cursor)
     {
         final ViewHolder mHolder = (ViewHolder) view.getTag();
-        mHolder.home_name.setText(cursor.getString(COL_HOME));
-        mHolder.home_name.setContentDescription(context.getString(R.string.a11y_home_team_name, cursor.getString(COL_HOME)));
-        mHolder.away_name.setText(cursor.getString(COL_AWAY));
-        mHolder.away_name.setContentDescription(context.getString(R.string.a11y_away_team_name, cursor.getString(COL_AWAY)));
+        final String homeTeamName = cursor.getString(COL_HOME);
+        final String awayTeamName = cursor.getString(COL_AWAY);
+        final int homeTeamGoals = cursor.getInt(COL_HOME_GOALS);
+        final int awayTeamGoals = cursor.getInt(COL_AWAY_GOALS);
+        final String matchTime = cursor.getString(COL_MATCHTIME);
+        final String space = " ";
 
-        mHolder.date.setText(cursor.getString(COL_MATCHTIME));
-        mHolder.date.setContentDescription(context.getString(R.string.game_time) + " " + cursor.getString(COL_MATCHTIME));
-        final String scores = Utilies.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS));
-        mHolder.score.setText(scores);
+        mHolder.home_name.setText(homeTeamName);
+        mHolder.home_name.setContentDescription(context.getString(R.string.a11y_home_team_name, homeTeamName));
+        mHolder.away_name.setText(awayTeamName);
+        mHolder.away_name.setContentDescription(context.getString(R.string.a11y_away_team_name, awayTeamName));
+        mHolder.date.setText(matchTime);
 
-        boolean gameHasStarted = Utilies.hasGameStarted(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS));
+
+
+        boolean gameHasStarted = Utilies.hasGameStarted(homeTeamGoals, awayTeamGoals);
+
         if(gameHasStarted){
-            mHolder.score.setContentDescription(context.getString(R.string.game_score) + cursor.getInt(COL_HOME_GOALS) + " " + context.getString(R.string.to) + " " + cursor.getInt(COL_AWAY_GOALS));
+            mHolder.home_team_score.setText(String.valueOf(homeTeamGoals));
+            mHolder.away_team_score.setText(String.valueOf(awayTeamGoals));
+            mHolder.home_team_score.setContentDescription(context.getString(R.string.game_score) + homeTeamGoals);
+            mHolder.away_team_score.setContentDescription(context.getString(R.string.game_score) + awayTeamGoals);
+            mHolder.date.setContentDescription(context.getString(R.string.game_time) + space + matchTime);
+            highlightWinningTeam(mHolder, homeTeamGoals, awayTeamGoals);
         } else {
-            mHolder.score.setContentDescription(context.getString(R.string.game_has_not_started));
+            final String noScore = String.valueOf(0);
+            mHolder.home_team_score.setText(noScore);
+            mHolder.away_team_score.setText(noScore);
+            mHolder.home_team_score.setContentDescription(context.getString(R.string.game_score) + noScore);
+            mHolder.away_team_score.setContentDescription(context.getString(R.string.game_score) + noScore);
+            mHolder.date.setContentDescription(context.getString(R.string.game_time) + space + matchTime + space + context.getString(R.string.game_has_not_started));
         }
         mHolder.match_id = cursor.getDouble(COL_ID);
-        final int homeTeamCrest = Utilies.getTeamCrestByTeamName(cursor.getString(COL_HOME));
-        final int awayTeamCrest = Utilies.getTeamCrestByTeamName(cursor.getString(COL_AWAY));
-
-        mHolder.home_crest.setImageResource(homeTeamCrest);
-        mHolder.away_crest.setImageResource(awayTeamCrest);
-        //Log.v(FetchScoreTask.LOG_TAG,mHolder.home_name.getText() + " Vs. " + mHolder.away_name.getText() +" id " + String.valueOf(mHolder.match_id));
-        //Log.v(FetchScoreTask.LOG_TAG,String.valueOf(detail_match_id));
         LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.detail_fragment, null);
@@ -100,8 +110,10 @@ public class scoresAdapter extends CursorAdapter
                 public void onClick(View v)
                 {
                     //add Share Action
-                    context.startActivity(createShareForecastIntent(mHolder.home_name.getText()+" "
-                    +mHolder.home_team_score.getText()+" "+mHolder.away_name.getText() + " " + mHolder.away_team_score.getText()));
+                    context.startActivity(createShareForecastIntent(
+                            mHolder.home_name.getText()+ space
+                            +mHolder.home_team_score.getText()+ space
+                            +mHolder.away_name.getText() + space + mHolder.away_team_score.getText()));
                 }
             });
         } else
@@ -110,11 +122,31 @@ public class scoresAdapter extends CursorAdapter
         }
 
     }
+
+    private void highlightWinningTeam(ViewHolder mHolder, int homeTeamGoals, int awayTeamGoals) {
+        if(homeTeamGoals > awayTeamGoals){
+            mHolder.home_name.setTextColor(Color.BLACK);
+            mHolder.home_team_score.setTextColor(Color.BLACK);
+            mHolder.away_name.setTextColor(Color.DKGRAY);
+            mHolder.away_team_score.setTextColor(Color.DKGRAY);
+        } else if(awayTeamGoals > homeTeamGoals){
+            mHolder.away_name.setTextColor(Color.BLACK);
+            mHolder.away_team_score.setTextColor(Color.BLACK);
+            mHolder.home_name.setTextColor(Color.DKGRAY);
+            mHolder.home_team_score.setTextColor(Color.DKGRAY);
+        } else {
+            mHolder.away_name.setTextColor(Color.DKGRAY);
+            mHolder.away_team_score.setTextColor(Color.DKGRAY);
+            mHolder.home_name.setTextColor(Color.DKGRAY);
+            mHolder.home_team_score.setTextColor(Color.DKGRAY);
+        }
+    }
+
     public Intent createShareForecastIntent(String ShareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + FOOTBALL_SCORES_HASHTAG);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + " " + FOOTBALL_SCORES_HASHTAG);
         return shareIntent;
     }
 
