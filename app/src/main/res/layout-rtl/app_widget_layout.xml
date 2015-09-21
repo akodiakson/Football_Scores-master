@@ -9,27 +9,7 @@
     android:gravity="center_vertical"
     android:id="@+id/widget_container">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/home_team_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Hamburg"
-            />
-
-        <TextView
-            android:id="@+id/away_team_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Austria" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -46,7 +26,8 @@
             android:gravity="end"
             android:paddingRight="16dp"
             android:paddingEnd="16dp"
-            tools:text="3" />
+            tools:text="3"
+            android:contentDescription="@string/home_score"/>
 
         <TextView
             android:id="@+id/away_team_score"
@@ -55,7 +36,8 @@
             android:gravity="end"
             android:paddingRight="16dp"
             android:paddingEnd="16dp"
-            tools:text="1" />
+            tools:text="1"
+            android:contentDescription="@string/away_score"/>
 
     </LinearLayout>
 
@@ -76,8 +58,32 @@
             android:gravity="end"
             android:paddingRight="16dp"
             android:paddingEnd="16dp"
-            tools:text="1"
+            android:contentDescription="@string/game_time"
             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/home_team_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Hamburg"
+            android:contentDescription="@string/home_team"
+            />
+
+        <TextView
+            android:id="@+id/away_team_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Austria"
+            android:contentDescription="@string/away_team"/>
 
     </LinearLayout>
 </LinearLayout>

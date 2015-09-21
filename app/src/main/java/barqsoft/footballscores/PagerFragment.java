@@ -32,9 +32,7 @@ public class PagerFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.pager_fragment, container, false);
         mPagerHandler = (ViewPager) rootView.findViewById(R.id.pager);
-//        mPagerHandler.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
-        setPagerStripDirection(rootView);
         mPagerAdapter = new myPageAdapter(getChildFragmentManager());
         for (int i = 0;i < NUM_PAGES;i++)
         {
@@ -46,14 +44,6 @@ public class PagerFragment extends Fragment
         mPagerHandler.setAdapter(mPagerAdapter);
         mPagerHandler.setCurrentItem(MainActivity.current_fragment);
         return rootView;
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private void setPagerStripDirection(View rootView) {
-        PagerTabStrip strip = (PagerTabStrip)rootView.findViewById(R.id.pager_header);
-        boolean isRTL = Utilies.isRTL();
-        strip.setLayoutDirection(View.LAYOUT_DIRECTION_INHERIT);
-//        strip.setLayoutDirection(isRTL ? View.LAYOUT_DIRECTION_RTL : View.LAYOUT_DIRECTION_LTR);
     }
 
     private class myPageAdapter extends FragmentStatePagerAdapter

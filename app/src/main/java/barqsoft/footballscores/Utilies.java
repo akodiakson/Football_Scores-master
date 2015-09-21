@@ -20,7 +20,7 @@ public class Utilies
     public static final int CHAMPIONS_LEAGUE = 362;
     public static final int PRIMERA_DIVISION = 358;
     public static final int BUNDESLIGA = 351;
-    public static String getLeague(int league_num)
+    public static String getLeague(Context context, int league_num)
     {
         switch (league_num)
         {
@@ -29,7 +29,7 @@ public class Utilies
             case CHAMPIONS_LEAGUE : return "UEFA Champions League";
             case PRIMERA_DIVISION : return "Primera Division";
             case BUNDESLIGA : return "Bundesliga";
-            default: return "Not known League Please report";
+            default: return context.getString(R.string.unknown_league);
         }
     }
     public static String getMatchDay(int match_day,int league_num)
@@ -111,5 +111,9 @@ public class Utilies
             case "Stoke City FC" : return R.drawable.stoke_city;
             default: return R.drawable.no_icon;
         }
+    }
+
+    public static boolean hasGameStarted(int homeScore, int awayScore) {
+        return homeScore > 0 && awayScore > 0;
     }
 }

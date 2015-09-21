@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <string name="app_name">Football Scores</string>
     <string name="hello_world">Hello world!</string>
@@ -44,5 +44,18 @@
     <string name="home_team_logo">Home team logo</string>
     <string name="league_name">League name</string>
     <string name="widget_no_games">No game data is available for today.</string>
-    <!--<string name="add_widget">Add widget</string>-->
+    <string name="home_score">Home team score</string>
+    <string name="away_score">Away team score</string>
+
+
+    <!-- A11y -->
+    <string name="a11y_home_team_name">Home team: <xliff:g id="homeTeam">%1$s</xliff:g></string>
+    <string name="a11y_away_team_name">Away team: <xliff:g id="awayTeam">%1$s</xliff:g></string>
+    <string name="a11y_game_score">Game score: <xliff:g id="gameScore">%1$s</xliff:g></string>
+    <string name="to">to</string>
+    <string name="game_has_not_started">No score. Game has not started.</string>
+    <string name="unknown_league">Unknown league, please report.</string>
+    <!--<string name="a11y_home_team_score">High: <xliff:g id="high">%1$s</xliff:g></string>-->
+    <!--<string name="a11y_away_team_score">Low: <xliff:g id="low">%1$s</xliff:g></string>-->
+
 </resources>

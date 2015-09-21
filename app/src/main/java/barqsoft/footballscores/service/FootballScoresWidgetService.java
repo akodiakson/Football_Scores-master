@@ -1,6 +1,5 @@
 package barqsoft.footballscores.service;
 
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -85,7 +84,7 @@ public class FootballScoresWidgetService extends RemoteViewsService {
                 return null;
             }
 
-            RemoteViews scoreView = new RemoteViews(mContext.getPackageName(), R.layout.app_widget_initial_layout);
+            RemoteViews scoreView = new RemoteViews(mContext.getPackageName(), R.layout.app_widget_layout);
 
             final FootballMatchScore matchScore = matchScores.get(position);
             scoreView.setTextViewText(R.id.home_team_name, matchScore.getHomeTeamName());

@@ -9,58 +9,6 @@
     android:gravity="center_vertical"
     android:id="@+id/widget_container">
 
-
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:id="@+id/score_column">
-
-        <TextView
-            android:id="@+id/home_team_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:paddingRight="16dp"
-            android:paddingEnd="16dp"
-            tools:text="3" />
-
-        <TextView
-            android:id="@+id/away_team_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:paddingRight="16dp"
-            android:paddingEnd="16dp"
-            tools:text="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:id="@+id/time_column"
-        android:visibility="gone">
-
-
-        <TextView
-            android:id="@+id/game_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:paddingRight="16dp"
-            android:paddingEnd="16dp"
-            tools:text="1"
-            />
-
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,13 +21,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Hamburg"
+            android:contentDescription="@string/home_team"
             />
 
         <TextView
             android:id="@+id/away_team_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Austria" />
+            tools:text="Austria"
+            android:contentDescription="@string/away_team"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:id="@+id/score_column"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/home_team_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            tools:text="3"
+            android:contentDescription="@string/home_score"/>
+
+        <TextView
+            android:id="@+id/away_team_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            tools:text="1"
+            android:contentDescription="@string/away_score"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/time_column"
+        android:visibility="gone">
+
+
+        <TextView
+            android:id="@+id/game_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:paddingEnd="8dp"
+            tools:text="1"
+            android:contentDescription="@string/game_time"
+            />
 
     </LinearLayout>
 </LinearLayout>
