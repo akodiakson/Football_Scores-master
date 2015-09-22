@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -18,7 +19,7 @@ import barqsoft.footballscores.service.myFetchService;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainScreenFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
+public class MainScreenFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor>
 {
     public scoresAdapter mAdapter;
     public static final int SCORES_LOADER = 0;
@@ -43,16 +44,15 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
                              final Bundle savedInstanceState) {
         update_scores();
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        final ListView score_list = (ListView) rootView.findViewById(R.id.scores_list);
+        final ListView score_list = (ListView) rootView.findViewById(android.R.id.list);
+
         mAdapter = new scoresAdapter(getActivity(),null,0);
         score_list.setAdapter(mAdapter);
         getLoaderManager().initLoader(SCORES_LOADER,null,this);
         mAdapter.detail_match_id = MainActivity.selected_match_id;
-        score_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        score_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ViewHolder selected = (ViewHolder) view.getTag();
                 mAdapter.detail_match_id = selected.match_id;
                 MainActivity.selected_match_id = (int) selected.match_id;
@@ -62,12 +62,16 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         return rootView;
     }
 
+
+
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle)
     {
         return new CursorLoader(getActivity(),DatabaseContract.scores_table.buildScoreWithDate(),
                 null,null,fragmentdate,null);
     }
+
+
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)

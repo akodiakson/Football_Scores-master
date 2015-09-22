@@ -44,6 +44,7 @@
     <string name="home_team_logo">Home team logo</string>
     <string name="league_name">League name</string>
     <string name="widget_no_games">No game data is available for today.</string>
+    <string name="no_games_for_this_day">No game data is available for this day.</string>
     <string name="home_score">Home team score</string>
     <string name="away_score">Away team score</string>
 
