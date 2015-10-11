@@ -25,6 +25,7 @@ public class FootballScoresWidgetService extends RemoteViewsService {
 
     class FootballScoresStackRemoteViewsFactory implements  RemoteViewsService.RemoteViewsFactory{
 
+        public static final String DATE_FORMAT = "yyyy-MM-dd";
         private Context mContext;
         private List<FootballMatchScore> matchScores = new ArrayList<>();
 
@@ -43,8 +44,7 @@ public class FootballScoresWidgetService extends RemoteViewsService {
             Uri uri = DatabaseContract.scores_table.buildScoreWithDate();
 
             Date currentDate = new Date();
-            final String datePattern = "yyyy-MM-dd";
-            String formattedDate = new SimpleDateFormat(datePattern).format(currentDate);
+            String formattedDate = new SimpleDateFormat(DATE_FORMAT).format(currentDate);
 
             final Cursor query = mContext.getContentResolver().query(uri, null, DatabaseContract.scores_table.DATE_COL, new String[]{formattedDate}, null);
             if(query.moveToFirst()){
