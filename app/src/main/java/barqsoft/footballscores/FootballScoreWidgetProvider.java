@@ -1,7 +1,5 @@
 package barqsoft.footballscores;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -9,10 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 
-import java.util.Calendar;
-
 import barqsoft.footballscores.service.FootballScoresWidgetService;
-import barqsoft.footballscores.service.myFetchService;
 
 /**
  * Implementation of App Widget functionality.

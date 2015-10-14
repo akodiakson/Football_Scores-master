@@ -3,7 +3,6 @@ package barqsoft.footballscores;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -14,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import barqsoft.footballscores.service.myFetchService;
+import barqsoft.footballscores.service.FootballScoreRetrievalService;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -32,7 +31,7 @@ public class MainScreenFragment extends ListFragment implements LoaderManager.Lo
 
     private void update_scores()
     {
-        Intent service_start = new Intent(getActivity(), myFetchService.class);
+        Intent service_start = new Intent(getActivity(), FootballScoreRetrievalService.class);
         getActivity().startService(service_start);
     }
     public void setFragmentDate(String date)
