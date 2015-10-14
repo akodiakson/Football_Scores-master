@@ -19,7 +19,7 @@ import java.lang.ref.WeakReference;
 /**
  * Created by yehya khaled on 2/26/2015.
  */
-public class scoresAdapter extends CursorAdapter
+public class FootballScoreAdapter extends CursorAdapter
 {
     public static final int COL_HOME = 3;
     public static final int COL_AWAY = 4;
@@ -31,7 +31,7 @@ public class scoresAdapter extends CursorAdapter
     public static final int COL_ID = 8;
     public static final int COL_MATCHTIME = 2;
     public double detail_match_id = 0;
-    public scoresAdapter(Context context,Cursor cursor,int flags)
+    public FootballScoreAdapter(Context context, Cursor cursor, int flags)
     {
         super(context,cursor,flags);
     }
